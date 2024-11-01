@@ -1,0 +1,20 @@
+export * from './Icon';
+export * from './Playground';
+export * from './Explorer';
+export * from './Tabs';
+export * from './MonacoEditor';
+export * from './Modals';
+export * from './ProjectPanel';
+export * from './ExamplePanel';
+export * from './Previewer';
+export * from './Loader';
+// export * from './Divider';
+export * from './FlexSplitter';
+export * from './Menu';
+
+// import { CmajLanguageDefinition } from "../monaco/languages/cmajor/CmajLanguageDefinition";
+// import { FaustLanguageDefinition } from "../monaco/languages/faust/FaustLanguageDefinition";
+import { MonacoEditor } from './MonacoEditor';
+// MonacoEditor.registerLanguage(FaustLanguageDefinition);
+// MonacoEditor.registerLanguage(CmajLanguageDefinition);
+MonacoEditor.addExtension('cmajorpatch', 'json');

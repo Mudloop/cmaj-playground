@@ -1,0 +1,51 @@
+{
+	"name": "@cmaj-playground/frontend",
+	"scripts": {
+		"build": "bun build --entrypoints ./src/index.ts --outdir ./public/js --target browser --packages bundle --sourcemap=linked --asset-naming ../assets/[dir]/[name].[ext] --minify",
+		"build:html": "bun build --entrypoints ./assets/html/index.html ./assets/html/embed-demo.html --outdir ./public --target browser --asset-naming [name].[ext] --entry-naming ../artifacts/temp/[name].[ext]",
+		"build:workers:compiler": "bun build --entrypoints ./src/workers/Compiler.worker.ts --outdir ./artifacts/workers --target browser --packages bundle --sourcemap=linked --entry-naming compiler.worker.js --asset-naming [name].[ext] --minify",
+		"build:workers:transformer": "bun build --entrypoints ./src/workers/Transformer.worker.ts --outdir ./artifacts/workers --target browser --packages bundle --sourcemap=linked --entry-naming transformer.worker.js --asset-naming [name].[ext] --minify",
+		"build:workers:service": "bun build --entrypoints ./src/workers/PatchService.worker.ts --outdir ./public --target browser --packages bundle --sourcemap=linked --entry-naming service.worker.js --asset-naming [name].[ext] --minify",
+		"build:workers": "bun run build:workers:compiler && bun run build:workers:transformer && bun run build:workers:service",
+		"build:monaco:editor": "bun build --entrypoints ./node_modules/monaco-editor/esm/vs/editor/editor.worker.js --entry-naming monaco.editor.worker.js --outdir ./public/js/monaco --minify --target browser --sourcemap=linked",
+		"build:monaco:json": "bun build --entrypoints ./node_modules/monaco-editor/esm/vs/language/json/json.worker --entry-naming monaco.json.worker.js --outdir ./public/js/monaco --minify --target browser --sourcemap=linked",
+		"build:monaco:css": "bun build --entrypoints ./node_modules/monaco-editor/esm/vs/language/css/css.worker --entry-naming monaco.css.worker.js --outdir ./public/js/monaco --minify --target browser --sourcemap=linked",
+		"build:monaco:html": "bun build --entrypoints ./node_modules/monaco-editor/esm/vs/language/html/html.worker --entry-naming monaco.html.worker.js --outdir ./public/js/monaco --minify --target browser --sourcemap=linked",
+		"build:monaco:ts": "bun build --entrypoints ./node_modules/monaco-editor/esm/vs/language/typescript/ts.worker --entry-naming monaco.ts.worker.js --outdir ./public/js/monaco --minify --target browser --sourcemap=linked",
+		"build:monaco:workers": "bun run build:monaco:editor && bun run build:monaco:json && bun run build:monaco:css && bun run build:monaco:html && bun run build:monaco:ts",
+		"build:monaco:main": "webpack --config ./src/monaco/bundle/webpack.config.js",
+		"build:monaco": "bun run build:monaco:workers && bun run build:monaco:main",
+		"build:template": "bun build --entrypoints ./patch-template/index.ts --outdir ./artifacts/template --target browser --packages bundle --sourcemap=linked --entry-naming template.js --asset-naming [name].[ext] --minify",
+		"serve": "bun web-dev-server --node-resolve --watch --root-dir ./public --open",
+		"watch": "bun run build --watch & bun run build:workers:compiler --watch & bun run build:workers:transformer --watch & bun run build:workers:service --watch & bun run build:template --watch & bun run build:html --watch",
+		"start": "npm run watch & npm run serve"
+	},
+	"devDependencies": {
+		"@grame/faustwasm": "^0.7.4",
+		"@types/bun": "^1.1.12",
+		"@web/dev-server": "^0.4.6",
+		"ts-loader": "^9.5.1",
+		"tslib": "^2.7.0"
+	},
+	"dependencies": {
+		"@lit/context": "^1.1.3",
+		"@lit/task": "^1.0.1",
+		"@types/natural-sort": "^1.0.0",
+		"@types/path-browserify": "^1.0.3",
+		"css-loader": "^7.1.2",
+		"jszip": "^3.10.1",
+		"lit": "^3.2.1",
+		"mime": "^4.0.4",
+		"mini-css-extract-plugin": "^2.9.1",
+		"monaco-editor": "^0.52.0",
+		"monaco-editor-workers": "^0.45.0",
+		"monaco-themes": "^0.4.4",
+		"natural-sort": "^1.0.0",
+		"path": "^0.12.7",
+		"path-browserify": "^1.0.1",
+		"style-loader": "^4.0.0",
+		"webpack": "^5.95.0",
+		"webpack-cli": "^5.1.4"
+	},
+	"type": "module"
+}

@@ -1,0 +1,2 @@
+import './cmajor'
+import './faust'
