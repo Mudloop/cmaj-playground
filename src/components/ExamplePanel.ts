@@ -32,19 +32,6 @@ import { ProjectInfo } from "../state/Types";
 			font-size: 9px;
 			cursor: pointer;
 		}
-		
-		/*.selected {
-			background-color: rgba(226, 180, 97, 0.267) !important;
-			outline: 1px solid rgba(226, 180, 97, 0.29);
-			outline-offset: -1px;
-			border-radius: 2px;
-		}
-		.selected label {
-			opacity: 0.8;
-		}
-		.selected:hover {
-			background-color: rgba(226, 180, 97, 0.3);
-		}*/
 	`;
 	render = () => {
 		return html`

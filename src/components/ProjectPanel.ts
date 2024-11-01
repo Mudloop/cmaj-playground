@@ -156,9 +156,7 @@ import { Modals } from "./Modals";
 			this.requestUpdate();
 		}
 	}
-	isExample(project: ProjectInfo) {
-		return Object.values(examples).includes(project.source?.identifier!);
-	}
+	isExample = (project: ProjectInfo) => Object.values(examples).map(url => import.meta.resolve(url)).includes(project.source?.identifier!)
 	async newProject(template: string) {
 		const name = await Modals.prompt('Enter name', 'Enter a name for the new project');
 		if (name) {
@@ -186,8 +184,6 @@ import { Modals } from "./Modals";
 		if (!await this.playground.loadProject(info?.id)) {
 
 		}
-
-		//https://raw.githubusercontent.com/Mudloop/patchtest/main/examples/808.zip
 	}
 
 }
