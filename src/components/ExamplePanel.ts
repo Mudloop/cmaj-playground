@@ -54,8 +54,8 @@ import { ProjectInfo } from "../state/Types";
 					
 					<ul>	
 						
-						${Object.entries(examples).map(([name, url]) => html`
-							<li value=${url} class=${this.playground.project?.info.source?.identifier == url ? 'selected' : ''} @pointerdown=${(e: Event) => this.selectExample(url)}>
+						${Object.entries(examples).map(([name, url])=>[name, import.meta.resolve(url)]).map(([name, url]) => html`
+							<li class=${this.playground.project?.info.source?.identifier == url ? 'selected' : ''} @pointerdown=${(e: Event) => this.selectExample(url)}>
 								${this.projects?.find(p => p.source?.identifier == url)?.modified ? html`•` : ''}
 								${name}
 							</li>
