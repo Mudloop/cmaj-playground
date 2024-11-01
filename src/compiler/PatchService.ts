@@ -15,7 +15,7 @@ export class PatchService {
 	static creationResolvers: Resolvers = {};
 	static updateResolvers: Resolvers = {};
 	private static async init() {
-		const ret = await navigator?.serviceWorker?.register(new URL('/service.worker.js', import.meta.url));
+		const ret = await navigator?.serviceWorker?.register(new URL('../service.worker.js', import.meta.url));
 		await navigator?.serviceWorker?.ready;
 		navigator?.serviceWorker?.addEventListener('message', (event: MessageEvent<any>) => {
 			const action = event.data.action;
